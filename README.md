@@ -59,7 +59,6 @@ This application was developed as a final project during a one year Java Course 
 - Spring Mail
 - OpenWeather API
 - Jira
-- AWS
 
 # Setup
 
