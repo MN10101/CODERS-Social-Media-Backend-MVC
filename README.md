@@ -81,8 +81,8 @@ This application was developed as a final project during a one year Java Course 
     Update the `src/main/resources/application.properties` file with your MySQL database credentials.
     ```properties
     spring.datasource.url=jdbc:mysql://localhost:3306/a3m
-    spring.datasource.username=a3m
-    spring.datasource.password=a3m
+    spring.datasource.username=***
+    spring.datasource.password=***
     spring.jpa.hibernate.ddl-auto=update
     ```
 4. Add the Weather API key to application properties:
