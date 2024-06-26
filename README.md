@@ -29,18 +29,6 @@ This application was developed as a final project during a one year Java Course 
 
 - Aleksandra Frej https://github.com/alexef360
 
-
-
-# CHECKT IT OUT - I MEAN THE APP - NOW!
-Register your account, create a post, find a friend, and comment on their post. 
-
-Use this link [CODERS SOCIAL MEDIA APP](http://coder-cyber.eu-central-1.elasticbeanstalk.com/) -
-
-Scan the QR code below to access the app on your mobile device.
-
-![QRCodeCoders2](src/main/resources/img/QRCodeCoders2.png)
-
-
 # Features
 
 - User registration and authentication
