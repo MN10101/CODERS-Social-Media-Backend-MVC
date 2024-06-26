@@ -376,8 +376,5 @@ Visual representation of the Entity-Relationship for the database schema.
 ## All Comments
 ![Cybers026.png](src/main/resources/screens-cyber/Cybers026.png)
 
-## Deployment on AWS Elastic Beanstalk
-![aws.png](src/main/resources/img/aws.png)
-
 ## Project Management using Jira
 ![jira.png](src/main/resources/img/Jira.png)
