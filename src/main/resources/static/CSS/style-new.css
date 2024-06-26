@@ -1,0 +1,181 @@
+body {
+    background: url("https://i.ibb.co/SNr35BW/backMain.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    /*background-color: #b28abb;
+    background-image: linear-gradient(
+            180deg,
+            #0c0f32 0%,
+            #571845 40%,
+            #900c3f 60%,
+            #7a0211 80%,
+            rgba(57, 20, 112, 0.62) 100%*/
+    );
+
+    font-family: Chakra Petch, sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+}
+.form {
+    background: transparent ;
+    border: 2px solid rgba(255,255,255, .2);
+    backdrop-filter: blur(60px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+.card {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(100px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+.form-group input {
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px;
+    width: 100%; /* Ensure it takes up the full width of its container */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+.form-group textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px;
+    width: 100%; /* Ensure it takes up the full width of its container */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.form-group textarea::placeholder{
+    color: #9f9f9f;
+    opacity: 1;
+}
+
+.form-group input:focus{
+    background-color: transparent;
+    border-color: #ffffff;
+    color: white;
+}
+ .form-group textarea:focus{
+     background-color: transparent;
+     border-color: #ffffff;
+     color: white;
+ }
+
+.card-text {
+    font-size: 20px;
+}
+
+.custom-card {
+    height: 440px; /* Adjust the height as needed */
+    width: 100%; /* Adjust the width as needed */
+}
+
+.custom-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+    .custom-card {
+        height: auto;
+        width: 100%;
+    }
+}
+
+.card-title{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.navbar-dark .navbar-nav .nav-link {
+    /*color: #212529;*/
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    /*color: #527fc0;*/
+    color: #8176b9;
+    font-weight: 500;
+}
+
+.btn-danger{
+    border-radius: 40px;
+    margin-top: 5px;
+}
+
+.btn-primary {
+    background-color: transparent;
+    border: 2px solid rgba(255,255, 255, .2);
+    border-radius: 40px;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #8176b9;
+    border-color: #8176b9;
+    color: #fff;
+}
+.btn-outline-primary {
+    background-color: transparent;
+    border: 2px solid rgba(255,255, 255, .2);
+    border-radius: 40px;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 20px;
+}
+
+.btn-outline-primary:hover {
+    background-color: #8176b9;
+    border-color: #8176b9;
+    color: #fff;
+}
+
+.carousel-control-prev-icon{
+    background-image: none;
+    padding-right: 100px;
+}
+.carousel-control-next-icon{
+    background-image: none;
+    padding-left: 30px;
+}
+
+.carousel-control-prev-icon::after,
+.carousel-control-next-icon::after {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-top: 4px solid white;
+    border-right: 4px solid white;
+}
+
+.carousel-control-prev-icon::after {
+    transform: rotate(-135deg);
+}
+
+.carousel-control-next-icon::after {
+    transform: rotate(45deg);
+}
+

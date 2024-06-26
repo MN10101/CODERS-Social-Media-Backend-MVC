@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<style>
+    body {
+        background: url("https://i.ibb.co/vwLkFs9/background2.jpg") no-repeat;
+        background-size: cover;
+        background-position: center;
+        /* background-color: #b28abb;
+        background-image: linear-gradient(
+                180deg,
+                #0c0f32 0%,
+                #571845 40%,
+                #900c3f 60%,
+                #7a0211 80%,
+                rgba(57, 20, 112, 0.62) 100%*/
+    );
+
+        font-family: Chakra Petch, sans-serif;
+        color: #ffffff;
+        min-height: 100vh;
+    }
+
+    .login-form {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(60px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        color: #fff;
+        border-radius: 10px;
+        padding: 30px 40px;
+
+    }
+
+    .card {
+        background: transparent;
+        border: none;
+        color: white;
+    }
+
+    .card-header {
+        background: transparent;
+        border-bottom: none;
+    }
+
+    .card-body {
+        background: transparent;
+    }
+
+    .card-body a {
+        color: white;
+        font-weight: bold;
+        padding: 10px 30px;
+    }
+
+    .form-group input {
+        background: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        font-size: 16px;
+        color: #fff;
+    }
+
+    .form-group input:focus {
+        background-color: transparent;
+        border-color: #666;
+        color: white;
+    }
+
+    .form-group input::placeholder {
+        color: #9f9f9f;
+        opacity: 1;
+    }
+
+    .btn-primary {
+        background-color: transparent;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        backdrop-filter: blur(60px);
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background-color: #8176b9;
+        border-color: #8176b9;
+        color: #fff;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .form-group .form-control {
+        padding-right: 2.5rem;
+        /* Space for the icon */
+    }
+
+    .form-group .bi {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ccc;
+        /* Icon color */
+    }
+</style>
+
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+
+
+<div class="container">
+
+
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="login-form mt-5">
+                <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+                <div class="card mb-3">
+                    <div class="card-header text-center text-white">
+                        <h3>Login Page</h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/authenticate}" method="post">
+                            <div th:if="${param.error}" class="alert alert-danger">
+                                Invalid username and password.
+                            </div>
+                            <div th:if="${param.logout}" class="alert alert-info">
+                                You have been logged out.
+                            </div>
+                            <div th:if="${param.blocked}" class="alert alert-danger">
+                                Your account is blocked.
+                            </div>
+                            <div class="form-group ">
+                                <input type="text" placeholder="Username" id="username" name="username"
+                                       class="form-control" required />
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <div class="form-group mt-5">
+                                <input type="password" placeholder="Password" id="password" name="password"
+                                       class="form-control" required />
+                                <i class="bi bi-key-fill"></i>
+                            </div>
+                            <div class="form-group mt-4 text-center p-3 ">
+                                <input type="submit" value="Log in" class="btn btn-primary px-5" />
+                            </div>
+                        </form>
+                        <a th:href="@{/forgot-password}">Forgot your password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    If you dont have an account create one-->
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-6 col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <p>Don't have an account?</p>
+                    <a th:href="@{/mvc/member-form}" class="btn btn-primary">Register as a member</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+
+</body>
+
+</html>

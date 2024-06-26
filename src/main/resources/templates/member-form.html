@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: common-head}"></head>
+
+<body>
+<style>
+    body {
+        background: url("https://i.ibb.co/SNr35BW/backMain.jpg") no-repeat;
+        background-size: cover;
+        background-position: center;
+        font-family: Chakra Petch, sans-serif;
+        color: #ffffff;
+        min-height: 100vh;
+    }
+
+    .member-form {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(60px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        color: #fff;
+        border-radius: 10px;
+        padding: 30px 40px;
+    }
+
+    .card {
+        background: transparent;
+        border: none;
+        color: white;
+        width: 100%;
+        /* Ensure full width inside column */
+    }
+
+    .card-header {
+        background: transparent;
+        border-bottom: none;
+    }
+
+    .card-body {
+        background: transparent;
+    }
+
+    .card-body a {
+        color: white;
+        font-weight: bold;
+        padding: 10px 30px;
+    }
+
+    .form-group input {
+        background: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        font-size: 16px;
+        color: #fff;
+    }
+
+    .form-group input:focus {
+        background-color: transparent;
+        border-color: #666;
+        color: white;
+    }
+
+    .form-group input::placeholder {
+        color: #9f9f9f;
+        opacity: 1;
+    }
+
+    .btn-primary {
+        background-color: transparent;
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(60px);
+        border-radius: 40px;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background-color: #8176b9;
+        border-color: #8176b9;
+        color: #fff;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .form-group .form-control {
+        padding-right: 2.5rem;
+        /* Space for the icon */
+    }
+
+    .form-group .bi {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ccc;
+        /* Icon color */
+    }
+
+    /*style to delete the auto calendar icon for dob field, bootstrap icon used instead*/
+    input[type='date']::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+
+    .form-group .error-tooltip {
+        display: none;
+        position: absolute;
+        top: -25px;
+        right: 10px;
+        background-color: rgba(255, 0, 0, 0.8);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .form-group .form-control.error {
+        border-color: red;
+    }
+
+    /* Flexbox for equal height cards */
+    .row-equal {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-equal {
+        display: flex;
+        flex: 1;
+        min-width: 300px;
+        padding: 15px;
+    }
+
+    .card-equal {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 30px 40px;
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(60px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        border-radius: 10px;
+    }
+</style>
+
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+<div class="container">
+    <form th:action="@{${member.id} == null ? '/mvc/member-form/create' : '/mvc/member-form/update'}"
+          th:object="${member}" method="post">
+
+        <div class="row-equal justify-content-center">
+            <div class="col-equal">
+                <div class="member-form card-equal">
+                    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+                    <div class="card-header text-center">
+                        <h3>User</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- form for create or update depending on if there is an id or not -->
+
+                        <!-- hidden for update -->
+                        <input type="hidden" th:field="*{id}">
+
+                        <!-- username -->
+                        <div class="form-group">
+                            <input placeholder="Username" type="text" id="username" name="username"
+                                   th:field="*{user.username}" class="form-control" required>
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+
+                        <!-- email -->
+                        <div class="form-group">
+                            <input placeholder="E-mail" type="email" id="email" name="email"
+                                   th:field="*{user.email}" class="form-control" required>
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+
+                        <!-- password -->
+                        <div class="form-group" th:if="${member.id == null}">
+                            <input placeholder="Password" type="password" id="password" name="password"
+                                   th:field="*{user.password}" class="form-control" required>
+                            <i class="bi bi-key-fill"></i>
+                            <div class="error-tooltip" th:if="${#fields.hasErrors('user.password')}"
+                                 th:text="${#fields.errors('user.password')}"></div>
+                        </div>
+
+                        <!-- birth date -->
+                        <div class="form-group" th:if="${member.id == null}">
+                            <label class="px-2 pl-2" for="birthDate">Birth Date:</label>
+                            <input type="date" id="birthDate" name="birthDate" th:field="*{birthDate}"
+                                   class="form-control" required>
+                            <i class="bi bi-calendar-fill" style="padding-top: 32px"></i>
+                            <div class="error-tooltip" th:if="${#fields.hasErrors('birthDate')}"
+                                 th:errors="*{birthDate}"></div>
+                        </div>
+
+                        <input type="hidden" th:field="*{role}" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional fields for updates only -->
+            <div th:if="${member.id} != null" class="col-equal">
+                <div class="card-equal">
+                    <div class="card-header text-center">
+                        <h3>Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="firstName">First Name:</label>
+                                    <input type="text" id="firstName" name="firstName" th:field="*{firstName}"
+                                           class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- last name -->
+                                <div class="form-group">
+                                    <label for="lastName">Last Name:</label>
+                                    <input type="text" id="lastName" name="lastName" th:field="*{lastName}"
+                                           class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- profile picture -->
+                        <div class="form-group">
+                            <label for="profilePicture">Profile Picture (Url): </label>
+                            <input type="text" id="profilePicture" name="profilePicture"
+                                   th:field="*{profilePicture}" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${member.id} != null" class="col-equal">
+                <div class="card-equal">
+                    <div class="card-header text-center">
+                        <h3>Address</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <!-- city -->
+                                <div class="form-group">
+                                    <label for="city">City:</label>
+                                    <input type="text" id="city" name="city" th:field="*{city}" class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- country -->
+                                <div class="form-group">
+                                    <label for="country">Country:</label>
+                                    <input type="text" id="country" name="country" th:field="*{country}"
+                                           class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <!-- postal code -->
+                                <div class="form-group">
+                                    <label for="postalCode">Postal Code:</label>
+                                    <input type="text" id="postalCode" name="postalCode" th:field="*{postalCode}"
+                                           class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- phone -->
+                                <div class="form-group">
+                                    <label for="phone">Phone:</label>
+                                    <input type="text" id="phone" name="phone" th:field="*{phone}"
+                                           class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit button (text changes based on create/update) -->
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-lg-6 col-md-12">
+                <div class="mb-3">
+                    <div class="card-body d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary"
+                                th:text="*{id} == null ? 'Create Account' : 'Update Account'"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Remove previous error tooltips
+            const tooltips = document.querySelectorAll('.error-tooltip');
+            tooltips.forEach(function (tooltip) {
+                tooltip.style.display = 'none';
+            });
+
+            // Validate form fields
+            let isValid = true;
+
+            // Password validation popup
+            const passwordField = document.getElementById('password');
+            if (passwordField) {
+                const passwordError = passwordField.parentElement.querySelector('.error-tooltip');
+                if (passwordError) {
+                    if (passwordField.value.length < 8 || !passwordField.value.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!?@#$%^&+=]).{8,}$/)) {
+                        passwordError.style.display = 'block';
+                        passwordField.classList.add('error');
+                        isValid = false;
+                    } else {
+                        passwordError.style.display = 'none';
+                        passwordField.classList.remove('error');
+                    }
+                }
+            }
+
+            // Birth date validation popup
+            const birthDateField = document.getElementById('birthDate');
+            if (birthDateField) {
+                const birthDateError = birthDateField.parentElement.querySelector('.error-tooltip');
+                const birthDateValue = new Date(birthDateField.value);
+                const now = new Date();
+                if (birthDateError) {
+                    if (birthDateValue > now) {
+                        birthDateError.style.display = 'block';
+                        birthDateField.classList.add('error');
+                        isValid = false;
+                    } else {
+                        birthDateError.style.display = 'none';
+                        birthDateField.classList.remove('error');
+                    }
+                }
+            }
+
+            if (isValid) {
+                form.submit();
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
